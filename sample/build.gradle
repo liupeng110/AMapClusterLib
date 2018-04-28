@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+    compileSdkVersion 27
+    buildToolsVersion '27.0.3'
 
     defaultConfig {
         applicationId "com.houde.sample"
         minSdkVersion 15
-        targetSdkVersion 23
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
     }
@@ -18,22 +18,26 @@ android {
         }
     }
 
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+    }
+
 }
 
-task copyApk {
-    doLast {
-        println "./build/outputs/apk/${project.name}-debug.apk"
-        def versionName = android.defaultConfig.versionName
-        def appName = "sample_v${versionName}.apk"
-        copy {
-            from "./build/outputs/apk/${project.name}-debug.apk"
-            into "../apk/"
-            rename {
-                appName
-            }
-        }
-    }
-}
+//task copyApk {
+//    doLast {
+//        println "./build/outputs/apk/${project.name}-debug.apk"
+//        def versionName = android.defaultConfig.versionName
+//        def appName = "sample_v${versionName}.apk"
+//        copy {
+//            from "./build/outputs/apk/${project.name}-debug.apk"
+//            into "../apk/"
+//            rename {
+//                appName
+//            }
+//        }
+//    }
+//}
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
